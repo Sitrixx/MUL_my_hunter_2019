@@ -5,12 +5,12 @@
 ** disp_window
 */
 
-#include "my.h"
+#include "../include/my.h"
 
 void open_window(hunter *my)
 {
+    sfRenderWindow_setFramerateLimit(my->window, 200);
     button_position(my);
-  //  posit(my);
     create_rect(my);
     sfRenderWindow_drawSprite(my->window, my->sprite_background, NULL);
     sfSprite_setPosition(my->sprite_duck, my->position_duck);
@@ -21,9 +21,9 @@ void open_window(hunter *my)
             sfSprite_setTextureRect(my->sprite_duck, my->rect2);
         if (my->counter % 3 == 2)
             sfSprite_setTextureRect(my->sprite_duck, my->rect3);
-        my->counter++;
+        my->counter = my->counter + 2;
         sfRenderWindow_drawSprite(my->window, my->sprite_duck, NULL);
-        sfRenderWindow_display(my->window);
+        //sfRenderWindow_display(my->window);
     }
 }
 
@@ -50,25 +50,17 @@ void destroy(hunter *my)
 
 void hitbox(hunter *my)
 {
-  my->button = sfMouseLeft;
+    my->button = sfMouseLeft;
 
-  if (sfMouse_getPositionRenderWindow(my->window).x >= my->position_duck.x &&
-      sfMouse_getPositionRenderWindow(my->window).x <= my->position_duck.x
-      + 258 &&
-      sfMouse_getPositionRenderWindow(my->window).y >= my->position_duck.y &&
-      sfMouse_getPositionRenderWindow(my->window).y <= my->position_duck.y
-      + 149) {
-      if (sfMouse_isButtonPressed(my->button) == sfTrue) {
-          my->position_duck.x = -300;
-          my->position_duck.y = rand () % 900;
-      }
-
+    if (sfMouse_getPositionRenderWindow(my->window).x >= my->position_duck.x &&
+        sfMouse_getPositionRenderWindow(my->window).x <= my->position_duck.x
+        + 258 &&
+        sfMouse_getPositionRenderWindow(my->window).y >= my->position_duck.y &&
+        sfMouse_getPositionRenderWindow(my->window).y <= my->position_duck.y
+        + 149) {
+        if (sfMouse_isButtonPressed(my->button) == sfTrue) {
+            my->position_duck.x = -300;
+            my->position_duck.y = rand () % 900;
+        }
     }
 }
-
-/*void cursor(hunter *my)
-{
-    sfSprite_setPosition(my->sprite_cursor, my->cursor);
-    sfRenderWindow_drawSprite(my->window, my->sprite_cursor, NULL);
-    my->sprite_cursor = get_sprite(sfTexture_createFromFile(cursor.png", NULL));
-}*/

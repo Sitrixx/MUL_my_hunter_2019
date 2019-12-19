@@ -5,7 +5,7 @@
 ** init variables and functions
 */
 
-#include "my.h"
+#include "../include/my.h"
 
 int init_sprites(hunter *my)
 {
@@ -13,9 +13,9 @@ int init_sprites(hunter *my)
                                        sfResize | sfClose, NULL);
     if (!my->window)
         return (84);
-    my->texture_background = sfTexture_createFromFile("backg.png", NULL);
-    my->texture_duck = sfTexture_createFromFile("sprite.png", NULL);
-    my->texture_cursor = sfTexture_createFromFile("visor.png", NULL);
+    my->texture_background = sfTexture_createFromFile("./resources/backg.png", NULL);
+    my->texture_duck = sfTexture_createFromFile("./resources/sprite.png", NULL);
+    my->texture_cursor = sfTexture_createFromFile("./resources/visor.png", NULL);
     my->sprite_background = sfSprite_create();
     my->sprite_duck = sfSprite_create();
     my->sprite_cursor = sfSprite_create();
@@ -27,7 +27,7 @@ int init_sprites(hunter *my)
 
 int music(hunter *my)
 {
-    my->music = sfMusic_createFromFile("music.ogg");
+    my->music = sfMusic_createFromFile("./resources/music.ogg");
     if (!my->music)
         return (84);
     sfMusic_play(my->music);
@@ -55,7 +55,7 @@ void create_rect(hunter *my)
 
 void button_position(hunter *my)
 {
-    my->position_duck.x += 1;
+    my->position_duck.x += 4;
     if (my->position_duck.x >= 1920)
         my->position_duck.x = -110;
 }
